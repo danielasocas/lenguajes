@@ -20,9 +20,9 @@ data Term = Var Char
 
 {- Funciones para booleanos -}
 true :: Term
-True = T
+true = T
 false :: Term
-False = F
+false = F
 
 {- Funciones de operadores -}
 (\/) :: Term -> Term -> Term
@@ -41,15 +41,15 @@ False = F
 (!<==>) a b = Ndimp a b
 
 {- Funcion para la negacion -}
-neg :: Term
+neg :: Term -> Term
 neg a = Not a
 
 {- Ordenar precendencia de operadores -}
-infixl 4 (\/) 
-infixl 4 (/\) 
-infixl 3 (==>) 
-infixl 2 (<==>) 
-infixl 2 (!<==>) 
+infixl 4 \/
+infixl 4 /\
+infixl 3 ==>
+infixl 2 <==>
+infixl 2 !<==>
 
 {- Funciones de casos de Char-}
 a :: Term
@@ -104,3 +104,12 @@ y :: Term
 y = Var 'y'
 z :: Term
 z = Var 'z'
+
+showTerm :: Term -> String
+showTerm T = "true"
+showTerm F = "false"
+showTerm (Var a) = [a]
+
+{- Agregando el tipo Term a la clase Show y que su funcion show sea showTerm -}
+instance Show Term where
+	show = showTerm
