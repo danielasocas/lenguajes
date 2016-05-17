@@ -1,10 +1,22 @@
+{- Convirtiendolo en un modulo para poder usarlo en otros modulos -}
+
+module Term where
+
 {- Data constructor Term -}
 data Term = Var Char
-	| T
-	| F
-	| Or Term Term
-	| And Term Term
-{- AQUI VAN LOS CASOS DE EQUIVALENCIA, NEGACION, Y OTRAS COSAS LOGICAS -}
+	| T 				{-  true  -}
+	| F 				{- false  -}
+	| Or Term Term 		{-   \/   -}
+	| And Term Term 	{-   /\   -}
+	| Impl Term Term 	{-  ==>   -}
+	| Iff Term Term 	{-  <==>  -}
+	| Niff Term Term	{- !<==>  -}
+
+	{-                  !!!!                  -}
+	{- Equivalencia no esto seguro si va aqui -}
+	{- Tampoco estoy seguro si la negacion va -}
+	{- aqui                                   -}
+	{-                  !!!!                  -}
 
 {- Funciones para booleanos -}
 true :: Term; True = T
@@ -41,17 +53,16 @@ z :: Term; z = Var 'z'
 {- Funciones de operadores -}
 (\/) :: Term -> Term -> Term ; (\/) a b = Or a b
 (/\) :: Term -> Term -> Term ; (/\) a b = And a b
-{-
 
-(<==>) :: Term -> Term -> Term ; (<==>) a b = And a b 		* Aqui va la declaracion del equivalente y su negado, que creo	*
-(!<==>) :: Term -> Term -> Term ; (!<==>) a b = And a b 	*  que tenemos que hacer una funcion aparte para eso			* 
+(==>) :: Term -> Term -> Term; (==>) a b = Iff a b
 
--}
+(<==>) :: Term -> Term -> Term; (<==>) a b = Iff a b
+(!<==>) :: Term -> Term -> Term; (!<==>) a b = Niff a b
+
 
 {- Ordenar precendencia de operadores -}
-infixl 3 (\/) 
-infixl 3 (/\) 
-infixl 2 (==>) 
-infixl 1 (<==>) 
-infixl 1 (!<==>) 
-infixl 0 (===) 
+infixl 4 (\/) 
+infixl 4 (/\) 
+infixl 3 (==>) 
+infixl 2 (<==>) 
+infixl 2 (!<==>) 
