@@ -15,16 +15,20 @@ data Term = Var Char
 	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
 	{-                                        -}
 	{- Equivalencia no esto seguro si va aqui -}
+	{- R: El proyecto dice que es un tipo     -}
 	{-                                        -}
 	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
 
 {- Funciones para booleanos -}
 true :: Term
 true = T
+
 false :: Term
 false = F
 
 {- Funciones de operadores -}
+
+
 (\/) :: Term -> Term -> Term
 (\/) a b = Or a b
 
@@ -45,13 +49,14 @@ neg :: Term -> Term
 neg a = Not a
 
 {- Ordenar precendencia de operadores -}
-infixl 4 \/
-infixl 4 /\
-infixl 3 ==>
-infixl 2 <==>
-infixl 2 !<==>
+				{- El negado tiene la precedencia maxima, asi que no se coloca aqui -}
+infixl 4 \/		{- Asociancion hacia izquierda -}
+infixl 4 /\		{- Asociancion hacia izquierda -}
+infixr 3 ==>	{-  Asociancion hacia DERECHA  -}
+infixl 2 <==>	{- Asociancion hacia izquierda -}
+infixl 2 !<==>	{- Asociancion hacia izquierda -}
 
-{- Funciones de casos de Char-}
+{- Funciones de casos de Var Char-}
 a :: Term
 a = Var 'a'
 b :: Term
@@ -104,12 +109,3 @@ y :: Term
 y = Var 'y'
 z :: Term
 z = Var 'z'
-
-showTerm :: Term -> String
-showTerm T = "true"
-showTerm F = "false"
-showTerm (Var a) = [a]
-
-{- Agregando el tipo Term a la clase Show y que su funcion show sea showTerm -}
-instance Show Term where
-	show = showTerm
