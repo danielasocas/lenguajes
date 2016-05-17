@@ -12,12 +12,7 @@ data Term = Var Char
 	| Dimpl Term Term 	{-  <==>  -}
 	| Ndimp Term Term	{- !<==>  -}
 	| Not Term			{- negado -}
-	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
-	{-                                        -}
-	{- Equivalencia no esto seguro si va aqui -}
-	{- R: El proyecto dice que es un tipo     -}
-	{-                                        -}
-	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
+
 
 {- Funciones para booleanos -}
 true :: Term
@@ -55,7 +50,8 @@ infixl 4 /\		{- Asociancion hacia izquierda -}
 infixr 3 ==>	{-  Asociancion hacia DERECHA  -}
 infixl 2 <==>	{- Asociancion hacia izquierda -}
 infixl 2 !<==>	{- Asociancion hacia izquierda -}
-
+				{- El operador de sustitucion esta en otro modulo -}
+infixl 0 ===
 {- Funciones de casos de Var Char-}
 a :: Term
 a = Var 'a'
@@ -109,3 +105,8 @@ y :: Term
 y = Var 'y'
 z :: Term
 z = Var 'z'
+
+data Equation = Equiv Term Term
+
+(===) :: Term -> Term -> Equation
+(===) a b = Equiv a b
