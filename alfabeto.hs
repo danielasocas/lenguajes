@@ -41,12 +41,17 @@ z :: Term; z = Var 'z'
 {- Funciones de operadores -}
 (\/) :: Term -> Term -> Term ; (\/) a b = Or a b
 (/\) :: Term -> Term -> Term ; (/\) a b = And a b
-{-(<==>) :: Term -> Term -> Term ; (<==>) a b = And a b 	* Aqui va la declaracion del equivalente y su negado, 		*
-(!<==>) :: Term -> Term -> Term ; (!<==>) a b = And a b 	* que creo que tenemos que hacer una funcion aparte para eso* -}
+{-
+
+(<==>) :: Term -> Term -> Term ; (<==>) a b = And a b 		* Aqui va la declaracion del equivalente y su negado, que creo	*
+(!<==>) :: Term -> Term -> Term ; (!<==>) a b = And a b 	*  que tenemos que hacer una funcion aparte para eso			* 
+
+-}
 
 {- Ordenar precendencia de operadores -}
-infixl 2 (\/) 
-infixl 2 (/\) 
-infixl 1 (==>) 
-infixl 0 (<==>) 
-infixl 0 (!<==>) 
+infixl 3 (\/) 
+infixl 3 (/\) 
+infixl 2 (==>) 
+infixl 1 (<==>) 
+infixl 1 (!<==>) 
+infixl 0 (===) 
