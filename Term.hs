@@ -11,16 +11,43 @@ data Term = Var Char
 	| Impl Term Term 	{-  ==>   -}
 	| Iff Term Term 	{-  <==>  -}
 	| Niff Term Term	{- !<==>  -}
-
-	{-                  !!!!                  -}
+	| Not Term			{- negado -}
+	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
+	{-                                        -}
 	{- Equivalencia no esto seguro si va aqui -}
-	{- Tampoco estoy seguro si la negacion va -}
-	{- aqui                                   -}
-	{-                  !!!!                  -}
+	{-                                        -}
+	{-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-}
 
 {- Funciones para booleanos -}
 true :: Term; True = T
 false :: Term; False = F
+
+{- Funciones de operadores -}
+(\/) :: Term -> Term -> Term
+(\/) a b = Or a b
+
+(/\) :: Term -> Term -> Term 
+(/\) a b = And a b
+
+(==>) :: Term -> Term -> Term
+(==>) a b = Iff a b
+
+(<==>) :: Term -> Term -> Term
+(<==>) a b = Iff a b
+
+(!<==>) :: Term -> Term -> Term
+(!<==>) a b = Niff a b
+
+{- Funcion para la negacion -}
+neg :: Term
+neg a = Not a
+
+{- Ordenar precendencia de operadores -}
+infixl 4 (\/) 
+infixl 4 (/\) 
+infixl 3 (==>) 
+infixl 2 (<==>) 
+infixl 2 (!<==>) 
 
 {- Funciones de casos de Char-}
 a :: Term; a = Var 'a'
@@ -49,20 +76,3 @@ w :: Term; w = Var 'w'
 x :: Term; x = Var 'x'
 y :: Term; y = Var 'y'
 z :: Term; z = Var 'z'
-
-{- Funciones de operadores -}
-(\/) :: Term -> Term -> Term ; (\/) a b = Or a b
-(/\) :: Term -> Term -> Term ; (/\) a b = And a b
-
-(==>) :: Term -> Term -> Term; (==>) a b = Iff a b
-
-(<==>) :: Term -> Term -> Term; (<==>) a b = Iff a b
-(!<==>) :: Term -> Term -> Term; (!<==>) a b = Niff a b
-
-
-{- Ordenar precendencia de operadores -}
-infixl 4 (\/) 
-infixl 4 (/\) 
-infixl 3 (==>) 
-infixl 2 (<==>) 
-infixl 2 (!<==>) 
