@@ -10,8 +10,7 @@
 
 module Sust where
 
-Import Term
-Import Theorem
+import Term
 
 -- Clase de tipo para la sustitucion
 data Sust = St Term Term -- St significando sustitucion textual
@@ -36,7 +35,7 @@ instance Sustituir Sust where
 	
 	sust Impl a b (St t1 (Var p)) = Impl (sust a (St t1 p)) (sust b (St t1 p))
 	sust Dimpl a b (St t1 (Var p)) = Dimpl (sust a (St t1 p)) (sust b (St t1 p))
-	sust Ndmpl a b (St t1 (Var p)) = Ndmpl (sust a (St t1 p)) (sust b (St t1 p))
+	sust Ndimpl a b (St t1 (Var p)) = Ndimpl (sust a (St t1 p)) (sust b (St t1 p))
 	
 	sust Not a (St t1 (Var p)) = Not (sust a (St t1 p)) 
 
@@ -57,7 +56,7 @@ instance Sustituir (Term,Sust,Term) where
 	
 	sust Impl a b (t2, (St t1 (Var p)), Var q) = Impl (sust a (t2, (St t1 (Var p)), Var q)) (sust b (t2, (St t1 (Var p)), Var q))
 	sust Dimpl a b (t2, (St t1 (Var p)), Var q) = Dimpl (sust a (t2, (St t1 (Var p)), Var q)) (sust b (t2, (St t1 (Var p)), Var q))
-	sust Ndmpl a b (t2, (St t1 (Var p)), Var q) = Ndmpl (sust a (t2, (St t1 (Var p)), Var q)) (sust b (t2, (St t1 (Var p)), Var q))
+	sust Ndimpl a b (t2, (St t1 (Var p)), Var q) = Ndimpl (sust a (t2, (St t1 (Var p)), Var q)) (sust b (t2, (St t1 (Var p)), Var q))
 	
 	sust Not a (t2, (St t1 (Var p)), Var q) = Not (sust a (t2, (St t1 (Var p)), Var q)) 
 
@@ -80,7 +79,7 @@ instance Sustituir (Term,Term,Sust,Term,Term) where
 	
 	sust Impl a b (t3,(t2, (St t1 (Var p)), Var q), Var r) = Impl (sust a (t3,(t2, (St t1 (Var p)), Var q), Var r)) (sust b (t3,(t2, (St t1 (Var p)), Var q), Var r))
 	sust Dimpl a b (t3,(t2, (St t1 (Var p)), Var q), Var r) = Dimpl (sust a (t3,(t2, (St t1 (Var p)), Var q), Var r)) (sust b (t3,(t2, (St t1 (Var p)), Var q), Var r))
-	sust Ndmpl a b (t3,(t2, (St t1 (Var p)), Var q), Var r) = Ndmpl (sust a (t3,(t2, (St t1 (Var p)), Var q), Var r)) (sust b (t3,(t2, (St t1 (Var p)), Var q), Var r))
+	sust Ndimpl a b (t3,(t2, (St t1 (Var p)), Var q), Var r) = Ndimpl (sust a (t3,(t2, (St t1 (Var p)), Var q), Var r)) (sust b (t3,(t2, (St t1 (Var p)), Var q), Var r))
 	
 	sust Not a (t3,(t2, (St t1 (Var p)), Var q), Var r) = Not (sust a (t3,(t2, (St t1 (Var p)), Var q), Var r)) 
 
@@ -102,36 +101,28 @@ instantiate Equiv izq der s = Equiv (sust (izq s)) (sust (der s))
 	e			= Expresion a aplicar Leibniz.
 	z 			= Variable de la Expresion a la cual se va a sustituir con la ecuacion.
 -}
-leibniz :: Ecuacion -> Term -> Var z -> Ecuacion
+leibniz :: Ecuacion -> Term -> Term -> Ecuacion
 leibniz Equiv izq der e Var z = Equiv (sust e (St izq (Var z))) (sust e (St der (Var z)))  
 
 {- Funcion inferrencia
 	
 -}
-infer :: Float -> sus -> Var z -> Term -> Ecuacion
-infer n t1 sus  z e =  (leibniz (instantiate teo sus) e z)
+infer :: sustituir sus => Float -> sus -> Term -> Term -> Ecuacion
+infer n sus Var z e =  (leibniz (instantiate prop(n) sus) e (Var z))
 
 {- Funcion step
 	
 -}
 step :: sustituir sus =>  Term -> Float -> sus -> Term -> Term -> Term 
 step t1 n sus (Var z) e	| t1 == mostrarI (infer n sus (Var z) e) = mostrarI (infer n sus (Var z) e)
-					| t1 == mostrarD (infer n sus (Var z) e) = mostrarD (infer n sus (Var z) e)
-					| otherwise = Error
+						| t1 == mostrarD (infer n sus (Var z) e) = mostrarD (infer n sus (Var z) e)
+						| otherwise = Error
 
 mostrarI :: Ecuacion -> Term
-comp Equiv t1 t2 = t1
+mostrarI Equiv t1 t2 = t1
 
 mostrarD :: Ecuacion -> Term
-comp Equiv t1 t2 = t2
+mostrarD Equiv t1 t2 = t2
 
-{- Funciones dummys -}
 
-with :: Ignorar
-with = ignora
 
-lambda :: Ignorar
-lambda = ignora
-
-lambda :: Ignorar
-lambda = ignora

@@ -5,13 +5,15 @@
 	Daniela Socas 11-10979
 	Sergio Teran  11-11020
 
-	Terminos 
+	Terminos y operadores
 -}
-
 
 {- Convirtiendolo en un modulo para poder usarlo en otros modulos -}
 
 module Term where
+{- Data constructoor para funciones dummy -}
+data Ignorar = Ignora
+
 
 {- Data constructor Term -}
 data Term = Var Char
@@ -21,9 +23,15 @@ data Term = Var Char
 	| And Term Term 	{-   /\   -}
 	| Impl Term Term 	{-  ==>   -}
 	| Dimpl Term Term 	{-  <==>  -}
-	| Ndimp Term Term	{- !<==>  -}
+	| Ndimpl Term Term	{- !<==>  -}
 	| Not Term			{- negado -}
 
+{- Data constructor Ecuacion -}
+data Ecuacion = Equiv Term Term
+
+{- Funciones para Ecuacion -}
+(===) :: Term -> Term -> Ecuacion
+(===) a b = Equiv a b
 
 {- Funciones para booleanos -}
 true :: Term
@@ -48,11 +56,11 @@ false = F
 (<==>) a b = Dimpl a b
 
 (!<==>) :: Term -> Term -> Term
-(!<==>) a b = Ndimp a b
+(!<==>) a b = Ndimpl a b
 
 {- Funcion para la negacion -}
-! :: Term -> Term
-! a = Not a
+(!) :: Term -> Term
+(!) a = Not a
 
 {- Ordenar precendencia de operadores -}
 				{- El negado tiene la precedencia maxima, asi que no se coloca aqui -}
@@ -116,8 +124,3 @@ y :: Term
 y = Var 'y'
 z :: Term
 z = Var 'z'
-
-data Ecuacion = Equiv Term Term
-
-(===) :: Term -> Term -> Ecuacion
-(===) a b = Equiv a b
