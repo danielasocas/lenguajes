@@ -116,7 +116,7 @@ infer n sus Var z e =  (leibniz (instantiate prop(n) sus) e (Var z))
 step :: sustituir sus =>  Term -> Float -> sus -> Term -> Term -> Term 
 step t1 n sus (Var z) e	| t1 == mostrarI (infer n sus (Var z) e) = mostrarI (infer n sus (Var z) e)
 						| t1 == mostrarD (infer n sus (Var z) e) = mostrarD (infer n sus (Var z) e)
-						| otherwise = Error
+						| otherwise = Error "Vas a clavar logica"
 
 mostrarI :: Ecuacion -> Term
 mostrarI Equiv t1 t2 = t1
