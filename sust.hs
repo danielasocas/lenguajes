@@ -88,3 +88,39 @@ instance Sustituir (Term,Term,Sust,Term,Term) where
 infixl 1 =: 
 (=:) :: Term -> Term -> Sust 
 (=:) t1 (Var p)  = St t1 (Var p)  
+
+{- Funcion instantiate
+	
+-}
+instantiate :: (sustituir s) => Ecuacion -> s -> Ecuacion
+instantiate Equiv izq der s = Equiv (sust (izq s)) (sust (der s)) 
+
+
+{- Funcion Leibniz
+	izq, der 	= lado izquierdo y derecho de la ecuacion instanciada
+	e			= Expresion a aplicar Leibniz
+	z 			= Variable de la Expresion a la cual se va a sustituir con la ecuacion 
+-}
+leibniz :: Ecuacion -> Term -> Var z -> Ecuacion
+leibniz Equiv izq der e Var z = Equiv (sust e (St izq (Var z))) (sust e (St der (Var z)))  
+
+{- Funcion inferrencia
+	
+-}
+infer :: Float -> Ecuacion dem -> sus -> Var z -> Term -> Ecuacion
+infer n dem t1 sus  z e =  (leibniz (instantiate teo sus) e z)
+
+{- Funcion step
+	
+-}
+step :: Term -> Float -> Ecuacion -> Sust -> Var z -> Term -> Ecuacion -> Term 
+step | t1  == blah = 
+	| t1 == bleh = 
+		|	otherwise = 
+data ? = Term -> IO Term
+
+{- Funcion statement
+	
+-}
+statement :: 
+
