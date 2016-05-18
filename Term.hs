@@ -1,3 +1,14 @@
+{- 	Universidad Simon Bolivar
+	Laboratorio de Lenguajes I 
+	Verificador de demostraciones logicas
+
+	Daniela Socas 11-10979
+	Sergio Teran  11-11020
+
+	Terminos 
+-}
+
+
 {- Convirtiendolo en un modulo para poder usarlo en otros modulos -}
 
 module Term where
