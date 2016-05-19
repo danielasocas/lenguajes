@@ -59,13 +59,6 @@ step t1 n sus (Var z) e	| t1 == li = ld
 {--------- Funcion statement -------}
 statement :: (Sustituir s, Show s) => Float -> Ignorar -> s -> Ignorar -> Ignorar -> Term -> Term -> Term -> IO Term
 statement n _ sus _ _ (Var z) e t1 = do
-							putStrLn $ "----------------"
-							putStrLn $ "n = " ++ show n
-							putStrLn $ "s = " ++ show sus
-							putStrLn $ "z = " ++ show z
-							putStrLn $ "e = " ++ show e
-							putStrLn $ "t1 = " ++ show t1
-							putStrLn $ "----------------"
 							putStrLn $  "=== < statement " ++ show n ++ " with " ++ show sus ++ " using lambda "++[z]++"("++show e ++ ") >"
 							let x = step t1 n sus (Var z) e  
 							putStrLn $ id show x
