@@ -85,14 +85,13 @@ neg :: Term -> Term
 neg = Not
 
 {- Ordenar precendencia de operadores -}
-				{- El negado tiene la precedencia maxima, asi que no se coloca aqui -}
-infixl 4 \/		{- Asociancion hacia izquierda -}
-infixl 4 /\		{- Asociancion hacia izquierda -}
-infixr 3 ==>	{-  Asociancion hacia DERECHA  -}
-infixl 2 <==>	{- Asociancion hacia izquierda -}
-infixl 2 !<==>	{- Asociancion hacia izquierda -}
-				{- El operador de sustitucion esta en otro modulo -}
+						{- El negado tiene la precedencia maxima, asi que no se coloca aqui -}
+infixl 4 \/, /\			{- Asociancion hacia izquierda -}
+infixr 3 ==>			{-  Asociancion hacia DERECHA  -}
+infixl 2 <==>, !<==>	{- Asociancion hacia izquierda -}
+						{- El operador de sustitucion esta en otro modulo -}
 infixl 0 ===
+
 {- Caracteres -}
 a :: Term
 a = Var 'a'
