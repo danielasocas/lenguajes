@@ -42,7 +42,7 @@ leibniz (Equiv izq der) e (Var z) = Equiv (sust e (St izq (Var z))) (sust e (St 
 
 {---------Funcion inferencia--------}
 infer :: (Sustituir s) => Float -> s -> Term -> Term -> Ecuacion
-infer n sus t1 e =  (leibniz (instantiate (prop n) sus) e t1)
+infer n sus z e =  (leibniz (instantiate (prop n) sus) e z)
 
 {----------- Funcion step ----------}
 {-	t1			= termino que compara en la inferencia
@@ -50,17 +50,24 @@ infer n sus t1 e =  (leibniz (instantiate (prop n) sus) e t1)
 	li,ld 		= termino que regresa si coincide con t1
 -}
 step :: (Sustituir s) =>  Term -> Float -> s -> Term -> Term -> Term 
-step t1 n sus (Var z) e	| t1 == li = li
-						| t1 == ld = ld
+step t1 n sus (Var z) e	| t1 == li = ld
+						| t1 == ld = li
 						| otherwise = error "Regla de Inferencia no aplicable"
 						where
 							(Equiv li ld) = (infer n sus (Var z) e)
 
 {--------- Funcion statement -------}
 statement :: (Sustituir s, Show s) => Float -> Ignorar -> s -> Ignorar -> Ignorar -> Term -> Term -> Term -> IO Term
-statement f _ s _ _ (Var z) e t1 = do
-							{-putStrLn $ id "=== < statement " ++ show f ++ " with " ++ show s ++ " using lambda "++[z]++"("++show e ++ ") >"-}
-							let x = step t1 f s (Var z) e
+statement n _ sus _ _ (Var z) e t1 = do
+							putStrLn $ "----------------"
+							putStrLn $ "n = " ++ show n
+							putStrLn $ "s = " ++ show sus
+							putStrLn $ "z = " ++ show z
+							putStrLn $ "e = " ++ show e
+							putStrLn $ "t1 = " ++ show t1
+							putStrLn $ "----------------"
+							putStrLn $  "=== < statement " ++ show n ++ " with " ++ show sus ++ " using lambda "++[z]++"("++show e ++ ") >"
+							let x = step t1 n sus (Var z) e  
 							putStrLn $ id show x
 							return (x)
 
@@ -69,8 +76,17 @@ statement f _ s _ _ (Var z) e t1 = do
 -}
 proof :: Ecuacion -> IO Term
 proof (Equiv a b) = do
-					putStrLn $ id "Probando " ++ (show a) ++ "==="++ (show b)
+					putStrLn $ id "Prooving " ++ (show a) ++ "==="++ (show b) ++ "\n"
 					putStrLn $ id show a
 					return (a)
 
 {------------ Funcion done ---------}
+{-	a,b 		= Terminos de la funcion 
+-}
+done :: Ecuacion -> Term -> IO ()
+
+done (Equiv a b) t = if a == t || b == t then 
+							putStrLn "\n proof successful" 
+						else 
+							putStrLn "proof unsuccessful" 
+
