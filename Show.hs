@@ -7,38 +7,41 @@
 
 	Show (No estoy muy clara donde poner esto pero fui adelantando)
 -}
+module Show where
 
+import Term
+import Theorems
 
-showTerm :: Term -> String
-showTerm (Var a) = (show a)
+instance Show Term where
+	show (Var a) = [a]
 
-showTerm T  = "true"
-showTerm F  = "false"
+	show T  = "true"
+	show F  = "false"
 
-showTerm (Or (Var a) (Var b)) = showTerm(Var a) ++ "\\/" ++ showTerm(Var b)
-showTerm (Or (Var a) t) = showTerm(Var a) ++ "\\/ (" ++ showTerm(t) ++ ")"
-showTerm (Or t (Var a)) = "(" ++ showTerm(t) ++ ")" ++ "\\/" ++ showTerm(Var a)
-showTerm (Or t1 t2) = "(" ++ showTerm t1 ++ ") \\/ (" ++ showTerm t2 ++ ")"
+	show (Or (Var a) (Var b)) = show(Var a) ++ "\\/" ++ show(Var b)
+	show (Or (Var a) t) = show(Var a) ++ "\\/ (" ++ show(t) ++ ")"
+	show (Or t (Var a)) = "(" ++ show(t) ++ ")" ++ "\\/" ++ show(Var a)
+	show (Or t1 t2) = "(" ++ show t1 ++ ") \\/ (" ++ show t2 ++ ")"
 
-showTerm (And (Var a) (Var b)) = showTerm(Var a) ++ "/\\" ++ showTerm(Var b)
-showTerm (And (Var a) t) = showTerm(Var a) ++ "\\/ (" ++ showTerm(t) ++ ")"
-showTerm (And t (Var a)) = "(" ++ showTerm(t) ++ ")" ++ " \\/ " ++ showTerm(Var a)
-showTerm (And t1 t2) = "(" ++ showTerm t1 ++ ") \\/ (" ++ showTerm t2 ++ ")"
+	show (And (Var a) (Var b)) = show(Var a) ++ "/\\" ++ show(Var b)
+	show (And (Var a) t) = show(Var a) ++ "\\/ (" ++ show(t) ++ ")"
+	show (And t (Var a)) = "(" ++ show(t) ++ ")" ++ " \\/ " ++ show(Var a)
+	show (And t1 t2) = "(" ++ show t1 ++ ") \\/ (" ++ show t2 ++ ")"
 
-showTerm (Impl (Var a) (Var b)) = showTerm(Var a) ++ "==>" ++ showTerm(Var b)
-showTerm (Impl (Var a) t) = showTerm(Var a) ++ " ==> (" ++ showTerm(t) ++ ")"
-showTerm (Impl t (Var a)) = "(" ++ showTerm(t) ++ ")" ++ " ==> " ++ showTerm(Var a)
-showTerm (Impl t1 t2) = "(" ++ showTerm t1 ++ ") ==> (" ++ showTerm t2 ++ ")"
+	show (Impl (Var a) (Var b)) = show(Var a) ++ "==>" ++ show(Var b)
+	show (Impl (Var a) t) = show(Var a) ++ " ==> (" ++ show(t) ++ ")"
+	show (Impl t (Var a)) = "(" ++ show(t) ++ ")" ++ " ==> " ++ show(Var a)
+	show (Impl t1 t2) = "(" ++ show t1 ++ ") ==> (" ++ show t2 ++ ")"
 
-showTerm (Dimpl (Var a) (Var b)) = showTerm(Var a) ++ "<==>" ++ showTerm(Var b)
-showTerm (Dimpl (Var a) t) = showTerm(Var a) ++ " <==> (" ++ showTerm(t) ++ ")"
-showTerm (Dimpl t (Var a)) = "(" ++ showTerm(t) ++ ")" ++ " <==> " ++ showTerm(Var a)
-showTerm (Dimpl t1 t2) = "(" ++ showTerm t1 ++ ") <==> (" ++ showTerm t2 ++ ")"
+	show (Dimpl (Var a) (Var b)) = show(Var a) ++ "<==>" ++ show(Var b)
+	show (Dimpl (Var a) t) = show(Var a) ++ " <==> (" ++ show(t) ++ ")"
+	show (Dimpl t (Var a)) = "(" ++ show(t) ++ ")" ++ " <==> " ++ show(Var a)
+	show (Dimpl t1 t2) = "(" ++ show t1 ++ ") <==> (" ++ show t2 ++ ")"
 
-showTerm (Ndimpl (Var a) (Var b)) = showTerm(Var a) ++ "!<==>" ++ showTerm(Var b)
-showTerm (Ndimpl (Var a) t) = showTerm(Var a) ++ " !<==> (" ++ showTerm(t) ++ ")"
-showTerm (Ndimpl t (Var a)) = "(" ++ showTerm(t) ++ ")" ++ " !<==> " ++ showTerm(Var a)
-showTerm (Ndimpl t1 t2) = "(" ++ showTerm t1 ++ ") !<==> (" ++ showTerm t2 ++ ")"
+	show (Ndimpl (Var a) (Var b)) = show(Var a) ++ "!<==>" ++ show(Var b)
+	show (Ndimpl (Var a) t) = show(Var a) ++ " !<==> (" ++ show(t) ++ ")"
+	show (Ndimpl t (Var a)) = "(" ++ show(t) ++ ")" ++ " !<==> " ++ show(Var a)
+	show (Ndimpl t1 t2) = "(" ++ show t1 ++ ") !<==> (" ++ show t2 ++ ")"
 
-showTerm (Not (Var a)) = "!" ++ showTerm(Var a) 
-showTerm (Not t) = "!(" ++ showTerm(t) ++ ")"
+	show (Not (Var a)) = "!" ++ show(Var a) 
+	show (Not t) = "!(" ++ show(t) ++ ")"
