@@ -14,6 +14,7 @@ module Sust where
 
 import Term
 import Theorems
+import Show
 
 -- Clase de tipo para la sustitucion
 data Sust = St Term Term -- St significando sustitucion textual
@@ -94,7 +95,9 @@ infer :: (Sustituir s) => Float -> s -> Term -> Term -> Ecuacion
 infer n sus t1 e =  (leibniz (instantiate (prop n) sus) e t1)
 
 {- Funcion step
-	
+	t1			= termino que compara en la inferencia
+	n,s,z,e 	= parametros de la funcion infer	
+	li,ld 		= termino que regresa si coincide con t1
 -}
 step :: (Sustituir s) =>  Term -> Float -> s -> Term -> Term -> Term 
 step t1 n sus (Var z) e	| t1 == li = li
@@ -103,11 +106,14 @@ step t1 n sus (Var z) e	| t1 == li = li
 						where
 							(Equiv li ld) = (infer n sus (Var z) e)
 
-statment :: Float -> Ignorar -> Sust -> Ignorar -> Ignorar -> Term -> Term -> Term -> IO Term
-statment f _ s _ _ (Var z) tE t1 = return t1 
+{- Funcion statment
+
+
+-}
+statment :: (Sustituir s) => Float -> Ignorar -> s -> Ignorar -> Ignorar -> Term -> Term -> Term -> IO Term
+statment f _ s _ _ (Var z) tE t1 = undefined
 
 {- Funciones dummys -}
-
 with :: Ignorar
 with = With
 
@@ -116,3 +122,11 @@ lambda = Lambda
 
 using :: Ignorar
 using = Using
+
+{- Funcion proof
+
+-}
+proof :: Ecuacion -> IO Term
+proof (Equiv a b) = do
+					putStrLn $ id "Probando " ++ (show a) ++ "==="++ (show b)
+					return (a)
