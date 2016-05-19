@@ -11,8 +11,9 @@
 {- Convirtiendolo en un modulo para poder usarlo en otros modulos -}
 
 module Term where
+
 {- Data constructoor para funciones dummy -}
-data Ignorar = Ignora
+data Ignorar = Lambda | Using | With 
 
 
 {- Data constructor Term -}
@@ -31,7 +32,7 @@ data Ecuacion = Equiv Term Term
 
 {- Funciones para Ecuacion -}
 (===) :: Term -> Term -> Ecuacion
-(===) a b = Equiv a b
+(===) = Equiv
 
 {- Funciones para booleanos -}
 true :: Term
@@ -44,23 +45,23 @@ false = F
 
 
 (\/) :: Term -> Term -> Term
-(\/) a b = Or a b
+(\/) = Or
 
 (/\) :: Term -> Term -> Term 
-(/\) a b = And a b
+(/\) = And
 
 (==>) :: Term -> Term -> Term
-(==>) a b = Impl a b
+(==>) = Impl
 
 (<==>) :: Term -> Term -> Term
-(<==>) a b = Dimpl a b
+(<==>) = Dimpl
 
 (!<==>) :: Term -> Term -> Term
-(!<==>) a b = Ndimpl a b
+(!<==>) = Ndimpl
 
 {- Funcion para la negacion -}
-(!) :: Term -> Term
-(!) a = Not a
+neg :: Term -> Term
+neg = Not
 
 {- Ordenar precendencia de operadores -}
 				{- El negado tiene la precedencia maxima, asi que no se coloca aqui -}
