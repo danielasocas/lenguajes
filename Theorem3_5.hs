@@ -5,6 +5,7 @@ import Term
 import Theorems
 import Show
 import Sust
+import Funciones
 
 verify = let theorem = (p <==> q) <==> q === p in
          proof theorem
