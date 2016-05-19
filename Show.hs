@@ -12,6 +12,10 @@ module Show where
 import Term
 import Theorems
 
+
+instance Show Ecuacion where
+	show (Equiv a b) = show a ++ " === " ++ show b
+
 instance Show Term where
 	show (Var a) = [a]
 
