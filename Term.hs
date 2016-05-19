@@ -12,11 +12,12 @@
 
 module Term where
 
-{- Data constructoor para funciones dummy -}
+{------------ CONSTRUCTORES DE DATOS -----------}
+
+{----------Funciones Dummy----------}
 data Ignorar = Lambda | Using | With 
 
-
-{- Data constructor Term -}
+{---------------Term----------------}
 data Term = Var Char
 	| T 				{-  true  -}
 	| F 				{- false  -}
@@ -27,23 +28,44 @@ data Term = Var Char
 	| Ndimpl Term Term	{- !<==>  -}
 	| Not Term			{- negado -}
 
-{- Data constructor Ecuacion -}
+{-------------Ecuacion--------------}
 data Ecuacion = Equiv Term Term
 
-{- Funciones para Ecuacion -}
+
+{------------------ INSTANCIAS -----------------}
+
+{---------------Term----------------}
+instance Eq Term where
+	T == T = True
+	F == F = True
+	(Var a) == (Var b) = a == b
+	(Or a b) == (Or c d) = (a == c) && (b == d)
+	(And a b) == (And c d) = (a == c) && (b == d)
+	(Impl a b) == (Impl c d) = (a == c) && (b == d)
+	(Dimpl a b) == (Dimpl c d) = (a == c) && (b == d)
+	(Ndimpl a b) == (Ndimpl c d) = (a == c) && (b == d)
+	(Not a ) == (Not b) = (a == b)
+	_ == _ = False
+
+	 
+
+
+{------------------ OPERADORES -----------------}
+
+{-------------Ecuacion--------------}
 (===) :: Term -> Term -> Ecuacion
 (===) = Equiv
 
-{- Funciones para booleanos -}
+{---------------Term----------------}
+
+{- Constantes -}
 true :: Term
 true = T
 
 false :: Term
 false = F
 
-{- Funciones de operadores -}
-
-
+{- operadores -}
 (\/) :: Term -> Term -> Term
 (\/) = Or
 
@@ -59,7 +81,6 @@ false = F
 (!<==>) :: Term -> Term -> Term
 (!<==>) = Ndimpl
 
-{- Funcion para la negacion -}
 neg :: Term -> Term
 neg = Not
 
@@ -72,7 +93,7 @@ infixl 2 <==>	{- Asociancion hacia izquierda -}
 infixl 2 !<==>	{- Asociancion hacia izquierda -}
 				{- El operador de sustitucion esta en otro modulo -}
 infixl 0 ===
-{- Funciones de casos de Var Char-}
+{- Caracteres -}
 a :: Term
 a = Var 'a'
 b :: Term
