@@ -8,6 +8,8 @@
 	Sustitucion 
 -}
 
+{-# LANGUAGE FlexibleInstances #-}
+
 module Sust where
 
 import Term
@@ -19,6 +21,17 @@ data Sust = St Term Term -- St significando sustitucion textual
 -- Clase Sustitucion y funcion sust.
 class Sustituir s where
 	sust :: Term -> s -> Term
+	
+	sust (Or a b) su = Or (sust a su) (sust b su)  
+	sust (And a b) su = And (sust a su) (sust b su)
+	sust (Impl a b) su = Impl (sust a su) (sust b su)
+	sust (Dimpl a b) su = Dimpl (sust a su) (sust b su)
+	sust (Ndimpl a b) su = Ndimpl (sust a su) (sust b su)
+	sust (Not a) su = Not (sust a su) 
+
+  	sust T _ = T 
+	sust F _ = F
+
 
 {- Instancia simple de sustitucion
 	a, b 	= parte de la ecuacion a la que voy a aplicar la sustitucion
@@ -28,39 +41,17 @@ class Sustituir s where
 instance Sustituir Sust where
 	sust Var a (St t1 (Var p))	| a == p 	= t1 -- Caso base 
 								| otherwise = Var a  
-  	sust T _ = T 
-	sust F _ = F
-	
-	sust Or a b su = Or (sust a su) (sust b su)  
-	sust And a b su = And (sust a su) (sust b su)
-	
-	sust Impl a b su = Impl (sust a su) (sust b su)
-	sust Dimpl a b su = Dimpl (sust a su) (sust b su)
-	sust Ndimpl a b su = Ndimpl (sust a su) (sust b su)
-	
-	sust Not a su = Not (sust a su) 
 
 {- Instancia doble de sustitucion
 	a, b	= parte de la ecuacion a la que voy a aplicar la sustitucion
 	t1, t2 	= terminos por los que voy a sustituir
 	p, q 	= terminos que quiero sustituir
 -}
-instance Sustituir (Term, Sust,Term) where
-	sust (Var a) (t2, (St t1 (Var p)), (Var q))	
+instance Sustituir (Term,Sust,Term) where
+	sust Var a (t2, St t1 (Var p), Var q)	
 		| a == p 	= t1 -- Caso base 
 		| a == q 	= t2
 		| otherwise = Var a  
-  	sust T _ = T 
-	sust F _ = F
-	
-	sust Or a b su = Or (sust a su) (sust b su)  
-	sust And a b su = And (sust a su) (sust b su)
-	
-	sust Impl a b su = Impl (sust a su) (sust b su)
-	sust Dimpl a b su = Dimpl (sust a su) (sust b su)
-	sust Ndimpl a b su = Ndimpl (sust a su) (sust b su)
-	
-	sust Not a su = Not (sust a su) 
 
 {- Instancia doble de sustitucion
 	a, b 	 	= parte de la ecuacion a la que voy a aplicar la sustitucion
@@ -73,17 +64,6 @@ instance Sustituir (Term,Term,Sust,Term,Term) where
 														| a == q 	= t2
 														| a == r 	= t3
 														| otherwise = Var a  
-   	sust T _ = T 
-	sust F _ = F
-	
-	sust Or a b su = Or (sust a su) (sust b su)  
-	sust And a b su = And (sust a su) (sust b su)
-	
-	sust Impl a b su = Impl (sust a su) (sust b su)
-	sust Dimpl a b su = Dimpl (sust a su) (sust b su)
-	sust Ndimpl a b su = Ndimpl (sust a su) (sust b su)
-	
-	sust Not a su = Not (sust a su) 
 
 -- Precedencia Izquierda 
 infixl 1 =: 
