@@ -22,8 +22,8 @@ data Sust = St Term Term -- St significando sustitucion textual
 
 {------------ COMPORTAMIENTO DE SUST -----------}
 
--- Clase Sustitucion y funcion sust.
-class Sustituir s where
+{------- Clase y funcion Sust --------}
+class (Show s) => Sustituir s where
 	sust :: Term -> s -> Term
 	
 	sust (Or a b) su = Or (sust a su) (sust b su)  
@@ -36,6 +36,8 @@ class Sustituir s where
   	sust T _ = T 
 	sust F _ = F
 
+instance Show Sust where
+	show (St a b) = show a ++ "=:" ++ show b 
 
 {--------- Instancia simple ----------}
 {-	a, b 	= parte de la ecuacion a la que voy a aplicar la sustitucion
@@ -69,7 +71,10 @@ instance Sustituir (Term,Term,Sust,Term,Term) where
 		| a == r 	= t3
 		| otherwise = Var a  
 
+
+
 {------------------- OPERADOR ------------------}
 infixl 1 =:				{- Asociacion Izquierda -}
 (=:) :: Term -> Term -> Sust  	
 (=:) = St 
+

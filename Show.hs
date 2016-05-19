@@ -12,7 +12,6 @@ module Show where
 import Term
 import Theorems
 
-
 instance Show Term where
 	show (Var a) = [a]
 
