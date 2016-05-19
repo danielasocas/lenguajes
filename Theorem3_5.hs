@@ -15,6 +15,5 @@ verify = let theorem = (p <==> q) <==> q === p in
          statement 3.3 with (q =: p) using lambda z (p <==> z)
          >>=
          statement 3.4 with (p =: p) using lambda z (z)
-        {->>=-}
-        {-done theorem
--}
+       	 >>=
+         done theorem
