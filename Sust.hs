@@ -61,8 +61,8 @@ instance Sustituir Sust where
 -}
 instance Sustituir (Term,Sust,Term) where
 	sust (Var a) (t2, St t1 (Var p), Var q)	
-		| a == p 	= t1 -- Caso base 
-		| a == q 	= t2
+		| a == p 	= t2 -- Caso base 
+		| a == q 	= t1
 		| otherwise = Var a  
 
 	sust (Or a b) su = Or (sust a su) (sust b su)  
@@ -81,9 +81,9 @@ instance Sustituir (Term,Sust,Term) where
 -}
 instance Sustituir (Term,Term,Sust,Term,Term) where
 	sust (Var a) (t3, t2, (St t1 (Var p)), Var q , Var r)	
-		| a == p 	= t1 -- Caso base 
+		| a == p 	= t3 -- Caso base 
 		| a == q 	= t2
-		| a == r 	= t3
+		| a == r 	= t1
 		| otherwise = Var a  
 
 	sust (Or a b) su = Or (sust a su) (sust b su)  
