@@ -11,16 +11,24 @@
   	Revisa si no existe ya, si el arista es valido y agrega el Vn a la lista vertices
  */
  
-/*Predicado que recorre un arbol y regresa la cantidad de nodos que tiene*/
+/* Predicado CantNodos
+	Recorre el arbol y cuenta cuantos nodos tiene
+	Resto, RestoA: Lista de aristas
+	SubArbol: Subarbol de un nodo
+*/
+	/*Caso Base*/
+	cantNodos([],0).
+	/*Caso recursivo*/
+	cantNodos(nodo(_,Resto),N) :- 	cantNodos(Resto,M),
+									N is M+1 .
+	cantNodos([arista(_,SubArbol)|RestoA],N) :- cantNodos(SubArbol,M1), 
+												cantNodos(RestoA,M2), 
+												N is M1 + M2.
 
-/*Caso Base*/
-cantNodos([],0).
-/*Caso recursivo*/
-cantNodos(nodo(_,Resto),N) :- cantNodos(Resto,M),N is M+1 .
-
-cantNodos([arista(_,SubArbol)|RestoA],N) :- cantNodos(SubArbol,M1), cantNodos(RestoA,M2), N is M1 + M2.
-
-
+/*--------- Predicado CantNodos----------*/
+/*
+	Recorre el arbol y cuenta cuantos nodos tiene
+*/
  bienEtiquetado(A) :- bienEtiquetado_aux(A,[],[]).
  
  bienEtiquetado_aux(nodo(Vn,E),Lvn,Lva) :- \+ member((Vn),Lvn) , es_arista(Vn,E,Lvn,Lva).										
