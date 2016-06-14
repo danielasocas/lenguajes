@@ -29,10 +29,7 @@
 	Revisa si no existe ya, si el arista es valido y agrega el Vn a la lista vertices
 	*/
 	 bienEtiquetado_aux(nodo(Vn,E),Lvn,Lva) :- 	\+ member((Vn),Lvn) , 
-	 											es_arista(Vn,E,Lvn,Lva),
-	 											cantNodos(nodo(Vn,E),N), 
-	 											Vn >= 1,
-	 											Vn =< N.									
+	 											es_arista(Vn,E,Lvn,Lva).								
 	 
 /* Predicado es_arista
 	Vn0 = Valor de nodo padre,
