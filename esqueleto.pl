@@ -44,9 +44,10 @@
 	/* Caso Base */
 	describir_aux(nodo(_Etiqueta,[])).
 	/* Caso Recursivo */
-	describir_aux(nodo(_,[Arista|RestoA])) :-	extraer(Arista, ValArista, ValNodo),
+	describir_aux(nodo(_,[Arista|RestoA])) :-	extraer(Arista, ValArista, ValNodo,M),
+												N is M+1,
 						  		  				/* Luego de extraer los valores de la estructura arista, los imprime */
-						  		  				tab(11),
+						  		  				tab(N),
 					  							write(ValArista),						     	   
 					  							write(' : '),
 								  				writeln(ValNodo),
@@ -60,3 +61,7 @@
 	Toma una arista y extrae sus datos
 	*/
 	extraer(arista(ValArista, nodo(ValNodo, SubArbol)), ValArista, ValNodo) :- describir_aux(nodo(ValNodo,SubArbol)).
+
+/* Predicado Esqueleto
+	*/
+	/*esqueleto(N,R,esqueleto) :-*/
