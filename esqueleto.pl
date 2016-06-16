@@ -4,7 +4,7 @@
 *	Daniela Socas 11-10979
 *	Sergio Teran  11-11020
 *
-*	Seccion 2: Esqueleto
+*	Parte 2: Esqueleto
 */
 
 % Cargando Archivos
@@ -44,7 +44,7 @@
 	/* Caso Base */
 	describir_aux(nodo(_Etiqueta,[])).
 	/* Caso Recursivo */
-	describir_aux(nodo(_,[_Arista|RestoA])) :-	extraer(_Arista, ValArista, ValNodo),
+	describir_aux(nodo(_,[Arista|RestoA])) :-	extraer(Arista, ValArista, ValNodo),
 						  		  				/* Luego de extraer los valores de la estructura arista, los imprime */
 						  		  				tab(11),
 					  							write(ValArista),						     	   
@@ -59,4 +59,4 @@
 
 	Toma una arista y extrae sus datos
 	*/
-	extraer(arista(_ValArista, nodo(_ValNodo, SubArbol)), _ValArista, _ValNodo) :- describir_aux(nodo(_ValNodo,SubArbol)).
+	extraer(arista(ValArista, nodo(ValNodo, SubArbol)), ValArista, ValNodo) :- describir_aux(nodo(ValNodo,SubArbol)).
