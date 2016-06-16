@@ -44,4 +44,18 @@ es_arista([]).
 es_arista(arista(_,N)|Es) :-  bienEtiquetado(N), es_arista(Es).
 
 
+----------------------------
+bienEtiquetado(A) :- bienEtiquetado_aux(A,[],LvnOut,[],LvaOut), is_set(LvnOut), is_set(LvaOut),length(LvnOut,Tam), max_list(LvnOut,Tam).
+
+/*   */
+
+bienEtiquetado_aux(nodo(Vn,[]),Lvn,[Vn|Lvn],Lva,Lva).
+bienEtiquetado_aux(nodo(Vn,E),Lvn,LvnOut,Lva,LvaOut) :- es_arista(Vn,E,[Vn|Lvn],LvnOut,Lva,LvaOut).
+
+/*   */
+
+es_arista(_,[],LvnOut,LvnOut,LvaOut,LvaOut).
+es_arista(Vn0,[arista(Va,nodo(Vn1,E))|Es],Lvn,LvnOut,Lva,LvaOut) :- Va is abs(Vn0 - Vn1), bienEtiquetado_aux(nodo(Vn1,E),Lvn,LvnOut,[Va|Lva],LvaOut), es_arista(Vn0,Es,LvnOut,_,LvaOut,_).
+
+
 
