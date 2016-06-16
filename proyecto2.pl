@@ -61,7 +61,12 @@
 		Lvn = lista de vertices, Lva = lista de aristas
 */
 
-bienEtiquetado(A) :- bienEtiquetado_aux(A,[],LvnOut,[],LvaOut), is_set(LvnOut), is_set(LvaOut),length(LvnOut,Tam), max_list(LvnOut,Tam).
+bienEtiquetado(nodo(1,[])).
+bienEtiquetado(A) :- bienEtiquetado_aux(A,[],LvnOut,[],LvaOut), 
+			is_set(LvnOut), 		
+			is_set(LvaOut),
+			length(LvnOut,Tam), 
+			max_list(LvnOut,Tam).
 
 /*   */
 
@@ -71,4 +76,6 @@ bienEtiquetado_aux(nodo(Vn,E),Lvn,LvnOut,Lva,LvaOut) :- es_arista(Vn,E,[Vn|Lvn],
 /*   */
 
 es_arista(_,[],LvnOut,LvnOut,LvaOut,LvaOut).
-es_arista(Vn0,[arista(Va,nodo(Vn1,E))|Es],Lvn,LvnOut,Lva,LvaOut) :- Va is abs(Vn0 - Vn1), bienEtiquetado_aux(nodo(Vn1,E),Lvn,LvnOut,[Va|Lva],LvaOut), es_arista(Vn0,Es,LvnOut,_,LvaOut,_).
+es_arista(Vn0,[arista(Va,nodo(Vn1,E))|Es],Lvn,LvnOut,Lva,LvaOut) :- Va is abs(Vn0 - Vn1), 
+			bienEtiquetado_aux(nodo(Vn1,E),Lvn,Lvn2,[Va|Lva],Lva2), 
+			es_arista(Vn0,Es,Lvn2,LvnOut,Lva2,LvaOut).
