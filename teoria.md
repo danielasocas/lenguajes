@@ -15,7 +15,7 @@
 
 > La introspección y reflexibidad son conceptos que se manejan en la POO pero no guardar ninguna relación entre sí.
 
->> No, la instropciones la capacidad de un lenguaje de examinar el tipo o las propiedades de un objeto en tiempo de corrida, mientras reflexion es la habilidad de algunos lenguajes para modificar el valor, es evidente que para poder modificar un valor, primero debe conocerse, luego, instrospeccion y reflexion estan relacionados entre
+>> No, la instropciones la capacidad de algunos lenguajes de *examinar* el tipo o las propiedades de un objeto en tiempo de corrida, y reflexion es la habilidad para *modificar* el valor, para poder modificar un valor primero debe conocerse, luego, estan relacionados.
 
 > En un lenguaje con un sistema de tipos dinámico la sobrecarga de métodos es innata y representa una comodidad dado que permite implementar un mismo método para distintos tipos.
 
