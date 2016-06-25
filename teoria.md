@@ -7,7 +7,7 @@
 
 > Los lenguajes de programación orientados a objetos que poseen herencia simple están limitados a incorporar comportamientos de un solo ancestro al momento de definir una clase.
 
->> Si, por definicion esto se cumple.
+>> No, en lnguajes como ruby, una clase hijo() puede heredar de una clase padre(), tambien puede heredar siempre cosas de la clase Object(), siendo esta la madre de todas las clases.
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
