@@ -39,4 +39,4 @@
 
 > Sin importar la herencia del lenguaje de POO, una clase podría tener más de un ancestro.
 
-<[Si|No] [pero]...>
+>> No, la herencia es la que determina si una clase puede tener uno (Herencia simple) o mas (Herencia multiple) ancestro.
