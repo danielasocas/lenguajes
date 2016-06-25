@@ -7,7 +7,7 @@
 
 > Los lenguajes de programación orientados a objetos que poseen herencia simple están limitados a incorporar comportamientos de un solo ancestro al momento de definir una clase.
 
-<[Si|No] [pero]...>
+>> Si, por definicion esto se cumple.
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
