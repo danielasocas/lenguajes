@@ -11,8 +11,8 @@
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
->> No, es comun en lenguajes 
 <[Si|No] [pero]...>
+>> No, es comun en lenguajes 
 
 > La introspección y reflexibidad son conceptos que se manejan en la POO pero no guardar ninguna relación entre sí.
 
