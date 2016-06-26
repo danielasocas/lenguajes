@@ -11,6 +11,7 @@
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
+>> No, es comun en lenguajes 
 <[Si|No] [pero]...>
 
 > La introspección y reflexibidad son conceptos que se manejan en la POO pero no guardar ninguna relación entre sí.
@@ -35,7 +36,7 @@
 
 > El paso de mensaje es un término que se maneja en modelos concurrentes, también de POO y es equivalente a la llamada de una función.
 
-<[Si|No] [pero]...>
+>> La equivalencia entre el paso de mensajes y la llamada a una funcion depende si es sincrono o no, si es asincrono, no es equivalente
 
 > Sin importar la herencia del lenguaje de POO, una clase podría tener más de un ancestro.
 
