@@ -11,8 +11,7 @@
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
-<[Si|No] [pero]...>
->> No, es comun en lenguajes 
+>> No, es comun que los lenguajes OOP ofrezan ambas opciones, por ejemplo, en Java todos los metodos son virtuales (despacho dinamico), en C++ un metodo puede ser declarado como virtual.
 
 > La introspección y reflexibidad son conceptos que se manejan en la POO pero no guardar ninguna relación entre sí.
 
@@ -29,7 +28,6 @@
 > Los métodos virtuales permiten asociar, al momento de compilar, una implementación de un método sobrecargado con una llamada del mismo; eliminando el **overhead** del despacho dinámico.
 
 >> No, si un metodo es virtual, la invocacion de los metodos sobrecargados, sera con despacho dinamico.
-
 
 > Cuando un lenguaje de POO tiene herencia simple no ocurre el problema del diamante pero de igual forma pueden existir llamadas ambiguas de métodos, dado que incorporar interfaces, módulos, protocolos, etc, no evita colisión de nombres.
 
