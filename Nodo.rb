@@ -1,12 +1,10 @@
 # Clase Nodo
 class Nodo
-	attr_accessor :valor, :hijos
+	attr_accessor :valor
 
-	def initialize(valor,hijos)
+	def initialize(valor)
 		@valor = valor
-		@hijos = hijos
 	end
 end
 
-un_nodo = Nodo.new("Soy un nodo",[])
-puts un_nodo.valor
+un_nodo = Nodo.new("Soy un nodo")
