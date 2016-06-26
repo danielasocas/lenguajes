@@ -7,7 +7,7 @@
 
 > Los lenguajes de programación orientados a objetos que poseen herencia simple están limitados a incorporar comportamientos de un solo ancestro al momento de definir una clase.
 
->> No, en lnguajes como ruby, una clase hijo() puede heredar de una clase padre(), tambien puede heredar siempre cosas de la clase Object(), siendo esta la madre de todas las clases.
+>> No, en lenguajes como ruby, una clase hijo() puede heredar de una clase padre(), tambien puede heredar siempre cosas de la clase Object(), siendo esta la madre de todas las clases.
 
 > Lenguajes de POO con un sistemas de tipos estático (C++, Java, C\#) no tienen la posibilidades de elegir la implementación de un método a tiempo de ejecución (despacho dinámico).
 
@@ -39,4 +39,4 @@
 
 > Sin importar la herencia del lenguaje de POO, una clase podría tener más de un ancestro.
 
->> No, la herencia es la que determina si una clase puede tener uno (Herencia simple) o mas (Herencia multiple) ancestro.
+>> Si, el tipo de herencia limita la cantidad de padres que puede tener una clase, pero es comun que una clase heredada a su vez herede de otras superclases.
