@@ -28,7 +28,8 @@
 
 > Los métodos virtuales permiten asociar, al momento de compilar, una implementación de un método sobrecargado con una llamada del mismo; eliminando el **overhead** del despacho dinámico.
 
-<[Si|No] [pero]...>
+>>** No, si un metodo es virtual, la invocacion de los metodos sera con despacho dinamico.**
+
 
 > Cuando un lenguaje de POO tiene herencia simple no ocurre el problema del diamante pero de igual forma pueden existir llamadas ambiguas de métodos, dado que incorporar interfaces, módulos, protocolos, etc, no evita colisión de nombres.
 
