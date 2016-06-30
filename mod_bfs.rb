@@ -11,6 +11,26 @@ module BFS
 # 	Este método recibe un bloque de manera implícita, itera desde self ha-
 # 	ciendo un recorrido BFS y en el camino va llamando al bloque con cada nodo
 # 	de la iteración.
+=begin	def bfs
+		cola = [self]
+
+		while !cola.empty?
+			auxCola = []
+			cola.each do |nodo|
+				unless nodo.nil?
+					yield nodo
+					nodo.each do |aux|
+						auxCola.push(aux)
+					end
+				end
+			end
+			cola = auxCola
+		end
+
+		self
+
+	end	
+=end
 	def bfs
 		cola = [self]
 		#cola.push(node)

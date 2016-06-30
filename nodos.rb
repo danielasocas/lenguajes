@@ -6,7 +6,6 @@ class Fixnum
 
 end
 
-
 class String
 
 	def mutar(mutador)

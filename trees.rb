@@ -6,7 +6,7 @@
 
 
 require_relative 'mod_bfs'
-require_relative 'nodos'
+#require_relative 'nodos'
 
 # Clase Arbol binario:
 # 	Posee un atributo que guarda el valor
@@ -47,17 +47,17 @@ class ArbolRosa
 
 	include BFS
 
-	def initialize(v, *h) # Inicializador del arbol binario
-		@valor = v
-		@hijos = h
+	def initialize(valor, *hijos) # Inicializador del arbol binario
+		@valor = valor if valor.class == Fixnum || valor.class == Array || valor.class == String
+		@hijos = hijos if hijos.each {|hijo| hijo.class == ArbolRosa}
 	end
 	
 	# Iterador each:
 	# iterar sobre los hijos del nodo actual cuando los mismos estén definidos.
 	# (iterador arbol binario)
 	def each
-		@hijos.each do |hijo|
-			yield hijo
+		hijos.each do |hijo|
+			yield hijo  if !hijo.nil?
 		end
 	end
 end
