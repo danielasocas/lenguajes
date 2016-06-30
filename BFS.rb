@@ -1,9 +1,10 @@
-require "arboles"
+$LOAD_PATH << '.'
+require "Arboles"
 
-module 
+module BFS
 	include Arboles
 
-	def Bfs.bfs(nodo)
+	def BFS.bfs(nodo)
 		cola = []
 		cola.push(nodo)
 
@@ -16,8 +17,25 @@ module
 		end
 	end
 
+=begin
+	def BFS.bfs(inicio)
+		cola = []
+		visitado = []
+  		cola.push(inicio)
 
-	def Bfs.recoger(nodo, &bloque)
+ 		while !cola.empty?
+    		nodoActual = cola.shift
+    		if !visitado.include? nodoActual
+				nodoActual.each
+				yield nodoActual
+				visitado.push(nodoActual)
+  			end
+  		end
+	end
+=end
+
+
+	def BFS.recoger(nodo, &bloque)
 		cola = []
 		cola.push(nodo)
 
