@@ -13,8 +13,6 @@ module BFS
 # 	de la iteración.
 	def bfs
 		cola = [self]
-		#cola.push(node)
-
 		while !cola.empty?
 			nodoActual = cola.shift
 			yield nodoActual if !nodoActual.valor.nil?		# Pasaje implicito del bloque
@@ -28,16 +26,13 @@ module BFS
 # 	Este método recibe un predicado (bloque) de manera explícita, itera
 # 	desde self haciendo un recorrido BFS y en el camino va recogiendo los nodos
 # 	que cumplan con el predicado.
-	def recoger(nodo, &bloque)
-		cola = []
-		cola.push(nodo)
-
-		while (cola.size != 0)
-			nodoActual = cola.shift
-			bloque.call(nodoActual) if !nodoActual.valor.nil? 	# Pasaje explicito del bloque
-			nodoActual.each do |hijo|
-				cola.push(hijo)
+	def recoger(pred)
+		arr = []
+		self.bfs do |nodo|
+			if pred.call(nodo)
+				arr.push(nodo)
 			end
 		end
+		return arr
 	end
 end
