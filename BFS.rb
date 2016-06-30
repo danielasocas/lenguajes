@@ -1,41 +1,43 @@
-$LOAD_PATH << '.'
-require "Arboles"
+# Universidad Simon Bolivar
+# Laboratorio de Lenguajes I 
+# Ruby
+# Daniela Socas 11-10979
+# Sergio Teran  11-11020
+
+
+# Modulo BFS y Recoger
 
 module BFS
-	include Arboles
 
-	def BFS.bfs(nodo)
-		cola = []
-		cola.push(nodo)
+# bfs:
+# 	Este método recibe un bloque de manera implícita, itera desde self ha-
+# 	ciendo un recorrido BFS y en el camino va llamando al bloque con cada nodo
+# 	de la iteración.
 
-		while (cola.size != 0)
-			nodoActual = cola.shift
-			yield nodoActual if !nodoActual.valor.nil?		# Pasaje implicito del bloque
-			nodoActual.each do |hijo|
-				cola.push(hijo)
+	def bfs
+		cola = [self]
+		
+		while cola != []
+			auxCola = []
+			cola.each do |nodo|
+				unless nodo.nil?
+					yield nodo
+					nodo.each do |aux|
+						auxCola.push(aux)
+					end
+				end
 			end
+			cola = auxCola
 		end
+		self
 	end
 
-=begin
-	def BFS.bfs(inicio)
-		cola = []
-		visitado = []
-  		cola.push(inicio)
+# recoger:
+# 	Este método recibe un predicado (bloque) de manera explícita, itera
+# 	desde self haciendo un recorrido BFS y en el camino va recogiendo los nodos
+# 	que cumplan con el predicado.
 
- 		while !cola.empty?
-    		nodoActual = cola.shift
-    		if !visitado.include? nodoActual
-				nodoActual.each
-				yield nodoActual
-				visitado.push(nodoActual)
-  			end
-  		end
-	end
-=end
-
-
-	def BFS.recoger(nodo, &bloque)
+	def recoger(nodo, &bloque)
 		cola = []
 		cola.push(nodo)
 
