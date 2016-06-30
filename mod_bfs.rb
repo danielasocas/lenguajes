@@ -1,9 +1,8 @@
 # Universidad Simon Bolivar
 # Laboratorio de Lenguajes I 
-# Ruby
+# Modulo BFS
 # Daniela Socas 11-10979
 # Sergio Teran  11-11020
-
 
 # Modulo BFS y Recoger
 module BFS
