@@ -14,7 +14,7 @@ module BFS
 		cola = [self]
 		while !cola.empty?
 			nodoActual = cola.shift
-			yield nodoActual if !nodoActual.valor.nil?		# Pasaje implicito del bloque
+			yield nodoActual if !nodoActual.valor.nil?
 			nodoActual.each do |hijo|
 				cola.push(hijo)
 			end

@@ -19,11 +19,11 @@ La introspección y reflexibidad son conceptos que se manejan en la POO pero no 
 
 En un lenguaje con un sistema de tipos dinámico la sobrecarga de métodos es innata y representa una comodidad dado que permite implementar un mismo método para distintos tipos.
 
-> <[Si|No] [pero]...>
+> Si, sin embargo se ve sacrificado el tiempo, para ahorrar espacio
 
 En los lenguajes POO existen los términos interfaz, módulo, clase abstracta, rol, etc; definidos como objetos que pueden encapsular definiciones de clases o implementaciones concretas de métodos.
 
-> <[Si|No] [pero]...>
+> Si, En los lenguajes OO, se pueden tener interfaces, módulos o roles. Los cuales permiten encapsular comportamientos que pueden adquirir distintas clases.
 
 Los métodos virtuales permiten asociar, al momento de compilar, una implementación de un método sobrecargado con una llamada del mismo; eliminando el **overhead** del despacho dinámico.
 
@@ -31,7 +31,7 @@ Los métodos virtuales permiten asociar, al momento de compilar, una implementac
 
 Cuando un lenguaje de POO tiene herencia simple no ocurre el problema del diamante pero de igual forma pueden existir llamadas ambiguas de métodos, dado que incorporar interfaces, módulos, protocolos, etc, no evita colisión de nombres.
 
-> <[Si|No] [pero]...>
+> Si, las interfaces y modulos necesitan tener nombres distintos, sino se sigue incurriendo en colisiones de nombres.
 
 El paso de mensaje es un término que se maneja en modelos concurrentes, también de POO y es equivalente a la llamada de una función.
 

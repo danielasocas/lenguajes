@@ -34,12 +34,15 @@ arbol_b_3 = ArbolBinario.new([1],
                             ArbolBinario.new([3,1,2,2,1,1],
                                 ArbolBinario.new([1,3,1,1,2,2,2,1]))))))
 
+=begin
 puts 'arbol 1'
 arbol_b_1.bfs { |x| puts x.valor }
 puts 'arbol 2'
 arbol_b_2.bfs { |x| puts x.valor }
 puts 'arbol 3'
 arbol_b_3.bfs { |x| puts x.valor }
+=end
+
 # 1
 # 2
 # 3
@@ -72,13 +75,16 @@ arbol_r_1 = ArbolRosa.new("animal",
                 ArbolRosa.new("avellana"),
                 ArbolRosa.new("mani")
             )
-arbol_r_1.bfs { |x| puts x.valor }
 
-=begin
+#arbol_r_1.bfs { |x| puts x.valor }
+
 p = arbol_r_1.valor.each_char.to_a.permutation.map &:join
+print p.map
+=begin
 
 arbol_r_1.recoger do |x|
-    (p.map { |w| w.include? x.valor }).inject(false) { |x,acc| a || acc}
-end
+        (p.map { |w| w.include? x.valor }).inject(false) { |x,acc| a || acc}
+    end
 =end
+
 # [arbol_r_1, arbol_r_lana, arbol_r_lima, arbol_r_lamina, arbol_r_ala, arbol_r_mani]
