@@ -1,27 +1,35 @@
-# Clase de Arbol
-class Arbol
-	attr_accessor :raiz
+# Clases de Arboles
+module Arboles
+	class Nodo
+		attr_accessor :valor 		# Atributos de lectura y escritura
+		attr_reader :hijoD, :hijoI	# Atributos de solo lectura
+		
+		def initialize(raiz,hd,hi)
+			@valor = valor if valor.class == Fixnum || valor.class == Array || valor.class == String
+			@HijoD = hd if hijoD.class == Node
+			@HijoI = hi if hijoI.class == Node
+		end
 
-	def initialize(raiz)
-		@raiz = raiz
+		def each 					# Iterador del arbol
+			yield hijoD if !hijoD.nil?
+			yield hijoI if !hijoI.nil?
+		end
 	end
-end
 
-class ArbBin < Arbol
-	attr_accessor :hijoD , :hijoI
-	def initialize(raiz,hi,hd)
-	 	@raiz  = raiz
-	 	@hijoI = hi
-	 	@hijoD = hd
-	end
+	class NodoRosa
 
-end
-
-class ArbRosa < Arbol
-	attr_accessor listHijos
-	 
-	def initialize(raiz,listHijos)
-	 	@raiz = raiz
-	 	@listHijos = listHijos
+		attr_accessor :valor		# Atributo de lectura y escritura
+		attr_reader :hijos			# Atributo de solo lectura
+		
+		def initialize(valor = nil, hijos = [])
+			@valor = valor if valor.class == Fixnum || valor.class == Array || valor.class == String
+			@hijos  = hijos if hijos.each{|hijo| hijo.class == NodoRosa}
+		end
+		
+		def each
+			hijos.each do |hijo| 
+				yield hijo if !hijo.nil?
+			end
+		end
 	end
 end
